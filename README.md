@@ -1,47 +1,60 @@
-# Bookmark+ — Native browser UI feature proposal (v2.2)
+# Bookmark+ — Let your bookmarks unfold.
 
-A static, interactive HTML/CSS/JavaScript concept for a **native** bookmark-folder display option, called a *Slide*, in Brave/Chromium.
+**A proposed native bookmarks-bar feature for Chromium-based browsers, including Brave and Chrome.**
 
-## The opening animation (new in v2.2)
+### [▶ Try the interactive Bookmark+ demo](https://ashcraig.com/bookmarkplus/)
 
-- The hero contains a compact, real-time illustration of the toolbar interaction.
-- It automatically expands **Work** and then **Personal**, showing that they remain open independently.
-- It **runs once on page load**, does not loop, and offers a **Replay preview** control.
-- Visitors can also toggle the preview folders manually. User interaction interrupts the scheduled animation.
-- `prefers-reduced-motion: reduce` skips the movement and immediately displays both expanded.
-- The preview uses a **copy of icons from the main working demo**, so it does not separately load another set of favicons.
+Bookmark folders have largely worked the same way for years: click a folder, navigate a dropdown, choose a bookmark, and repeat. Dropdowns are useful for big collections, but less convenient for the small groups of sites we visit throughout the day.
 
-## The full interactive demonstration
+**Bookmark+ introduces Slides:** an optional way for existing bookmark folders to reveal their links **horizontally, right on the bookmarks bar**.
 
-Click **Work**, **Personal**, and **Banking** independently to expand/collapse their existing bookmark examples inside a *simulated* browser toolbar. Use **Explore** to see a dark glass dropdown. Right-click a folder to choose **Display as Slide** or **Display as dropdown**, or use **Customize folders**.
+## The idea
 
-Sample bookmarks open real public websites. Changes made with the demo manager are temporary and remain in the webpage; **no real browser bookmarks are read or changed**.
+- **Choose per folder.** Right-click a folder and select **Display as Slide** or keep the familiar dropdown.
+- **Unfold inline.** Click a Slide to reveal its bookmarks immediately to its right, pushing subsequent toolbar items along.
+- **Keep multiple Slides open.** Work, Personal, and Banking can all stay expanded independently. Opening one never closes another.
+- **Close when you're ready.** Click a Slide's label again to collapse only that Slide.
+- **Keep your bookmarks.** Slides are a *display preference* for ordinary bookmark folders—not a new bookmark database or hierarchy.
 
-The static HTML is a **visual proof of concept**, not an extension or an actual Brave/Chromium patch. Brand icons and trademarks belong to their respective owners. No affiliation with Brave, Chrome, or the sample destinations is claimed.
+The concept also explores a restrained dark interface: flat bookmark links, separators, subtle hover states, and translucent dropdown menus.
 
-## Publish on ashcraig.com
+## Experience the prototype
 
-The site has no build step, package manager, API server, PHP, or database.
+**[Open the live interactive demonstration →](https://ashcraig.com/bookmarkplus/)**
 
-1. Find the Apache document root for the existing `ashcraig.com` virtual host. Do **not** change the existing vhost or production configuration.
-2. Create a separate `bookmarkplus/` subdirectory in that document root.
-3. Upload these files to that directory: `index.html`, `BookmarkPlus-IconFix-Walkthrough.mp4`, and `BookmarkPlus-Source.zip`.
-4. Open `https://ashcraig.com/bookmarkplus/` and test the intro, Slide expansion, dropdown, and source/video downloads.
-5. Confirm HTTPS is enabled, the page loads on mobile, and no PHP or sensitive server files are exposed.
+Try these interactions in the simulated browser:
 
-The source ZIP and video links in `index.html` are relative, so they work from `/bookmarkplus/` without editing URLs.
+1. Click **Work**, **Personal**, and **Banking**. Each opens independently.
+2. Click any open Slide again to collapse it.
+3. Open **Explore** to see the standard folder behavior in a dark-glass dropdown.
+4. Right-click a folder to switch between **Dropdown** and **Slide** presentation.
+5. Use **Customize folders** to experiment with the demo's folder settings and sample links.
 
-## Share source on GitHub
+Sample links lead to public websites. The prototype uses illustrative bookmarks rather than your own browser data.
 
-Create a public repo such as `bookmark-plus`, then include `index.html`, this README, `BRAVE_FEATURE_REQUEST.md`, `CHROMIUM_FEATURE_REQUEST.md`, and any preview assets you want published. You **do not need GitHub Pages** if the demo is hosted on ashcraig.com.
+## Proposed native implementation
 
-**Before choosing a license:** Publicly sharing code without an explicit license does not automatically grant reuse or redistribution rights. If you want Brave/Chromium developers to reuse the code, consider applying a suitable open-source license and confirming you own the material being licensed.
+The goal is a small, optional enhancement to the **existing browser bookmarks bar**:
 
-## Suggested review workflow
+- Keep the browser's bookmark model and folder structure intact.
+- Associate a `dropdown` or `slide` display preference with each folder.
+- Render expanded Slide children inline using the native toolbar layout and overflow behavior.
+- Preserve keyboard navigation, accessibility, and normal bookmark actions.
+- Decide during implementation how open/closed state should persist across windows and sessions.
 
-- Review wording, interaction, keyboard behavior, and layout at common screen sizes.
-- Search Brave Community and Chromium tracker for similar ideas before creating a new post.
-- Replace `[PUBLIC DEMO URL]`, `[SOURCE REPOSITORY URL]`, and `[VIDEO URL]` in the proposal drafts with verified public links.
-- Publish the Brave feature request first; then submit a Chromium feature request with the same canonical demo URL.
+The visual style is exploratory; the core feature is the **independent inline expansion of ordinary folders**.
 
-Do not describe the HTML illustration as a modified browser build or claim that Brave/Chromium has accepted the proposal.
+## Project status
+
+**Interactive design prototype / feature proposal.** This repository contains a standalone HTML, CSS, and JavaScript simulation. It does **not** modify Brave or Chromium, install an extension, or access or change anyone's real bookmarks.
+
+The proposal documents are available here:
+
+- [Brave feature request draft](BRAVE_FEATURE_REQUEST.md)
+- [Chromium feature request draft](CHROMIUM_FEATURE_REQUEST.md)
+
+Feedback on usability, accessibility, overflow, and native integration is welcome.
+
+## License and attribution
+
+The original demonstration code in this repository is offered under the [MIT License](LICENSE). Third-party brand names, icons, and trademarks displayed as examples remain the property of their respective owners. Bookmark+ is an independent concept and is not affiliated with or endorsed by Brave, Google, or the sample websites.
